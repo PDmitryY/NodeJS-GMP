@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "task1": "nodemon task1.js",
-    "task2": "nodemon task2.js"
+    "task1-1": "nodemon homework1/task1.js",
+    "task1-2": "nodemon homework1/task2.js"
   },
   "repository": {
     "type": "git",
