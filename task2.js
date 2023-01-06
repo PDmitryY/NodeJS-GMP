@@ -4,12 +4,22 @@ import path from 'path';
 import { pipeline } from 'stream';
 
 const __dirname = path.resolve();
-const csvPath = path.join(__dirname, 'csv', 'nodejs-hw1-ex1.csv');
-const txtPath = path.join(__dirname, 'txt', 'nodejs-hw1-ex1.txt');
 
-const readStream=fs.createReadStream(csvPath);
+async function convertCsvToTxt () {
+  try {
+    const csvPath = path.join(__dirname, 'csv', 'nodejs-hw1-ex1.csv');
+    fs.mkdir(path.join(__dirname, 'txt'), { recursive: true }, (err) => {
+      if (err) throw err;
+    });
+    const txtPath = path.join(__dirname, 'txt', 'nodejs-hw1-ex1.txt');
 
-const writeStream=fs.createWriteStream(txtPath);
+    const readStream=fs.createReadStream(csvPath);
 
-pipeline(readStream, csv(), writeStream, (err) => console.log(err));
+    const writeStream=fs.createWriteStream(txtPath);
 
+    pipeline(readStream, csv(), writeStream, (err) => console.log(err));
+  } catch (err){
+    console.log(err)
+  }
+}
+await convertCsvToTxt();
