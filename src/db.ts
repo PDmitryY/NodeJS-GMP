@@ -16,3 +16,5 @@ export async function initDb () {
   );`
   )
 }
+
+export default db;
