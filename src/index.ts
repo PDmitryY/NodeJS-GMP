@@ -2,17 +2,16 @@ import express, { Express, Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import { initDb } from './db';
 import usersRouter from './Routers/usersRouter';
+import bodyParser from 'body-parser';
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
+app.use(bodyParser.json());
 app.use('/users', usersRouter);
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
-});
 
 async function startApp() {
   try {
