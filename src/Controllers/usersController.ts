@@ -96,9 +96,8 @@ export const getAutoSuggestUser = async (req: Request, res: Response) => {
     const page = Number(req.query.page);
     let offset = limit * (page - 1);
     const loginSubstring = req.query.loginSubstring;
-    console.log("offset", offset);
     console.log("getAll req.query", req.query);
-    db.all(`SELECT * FROM users WHERE isDeleted = 0 loginSubstring LIKE %?% ORDER BY login LIMIT ? OFFSET ?`, [loginSubstring, limit, offset], (err, rows) => {
+    db.all(`SELECT * FROM users WHERE isDeleted=0 AND login LIKE '%${loginSubstring}%' ORDER BY login LIMIT ${limit} OFFSET ${offset}`, (err, rows) => {
       if (err) {
         throw err;
       }
