@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { body, param, query } from "express-validator";
-import { createUser, deleteUser, getAllUsers, getUserById, updateUser } from "./../Controllers/usersController";
+import { createUser, deleteUser, getAutoSuggestUser, getUserById, updateUser } from "./../Controllers/usersController";
 
 const usersRouter = Router();
 
@@ -28,6 +28,7 @@ usersRouter.get('/:id',
 usersRouter.get('/', 
   query('limit').isNumeric(),
   query('page').isNumeric(),
-  getAllUsers);
+  query('loginSubstring').notEmpty().isString(),
+  getAutoSuggestUser);
 
 export default usersRouter;
